@@ -1,7 +1,7 @@
 Hi, everyone!
-	Hoby is a simple framework to process data in high speed, and it just be a child.
+	Hoby is a simple framework to process data.
 	
-	If you want to join to develop Hoby, give me mail.
+	If you want to join to develop Hoby, give me a mail.
 
 Yours,
 	Kearney.
