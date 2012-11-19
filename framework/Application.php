@@ -6,14 +6,15 @@
  * @E-mail: kearneyjar@gmail.com
  *
  */
- class Application{
+ class Application extends View{
 
      public function __construct(){
+         parent::__construct();
          $this->_init();
-
-
      }
+
      public function _init(){
+
          echo 'Autoload start...<br>';
          $this->load_privilege();
          $this->load_config();

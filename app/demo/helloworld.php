@@ -9,7 +9,8 @@
 
  class Helloworld extends Application{
 
-     function Index(){
+
+    function Index(){
         echo "hello world!";
         $modelFile = str_replace('\\','/',(dirname(__FILE__))).'/model/memcahce.php';
 
@@ -26,6 +27,9 @@
         $m->close();
 
         $sec = new Security();
+
+        $this->assign('test', 'nihao');
+        $this->display('index');
 
      }
     function Test(){

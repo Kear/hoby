@@ -8,6 +8,10 @@ class Bootstrap {
 
         $this->Analysis();
         $this->launchPlugin();
+
+        //引入View类
+        include($viewfile = FRAMEWORK_PATH . '/view/view.php');
+
         //引入Application类
         $applicationFile = FRAMEWORK_PATH . '/Application.php';
 
@@ -17,8 +21,6 @@ class Bootstrap {
         include($applicationFile);
 
 
-
-
         //开始解析URL获得请求的控制器和方法
         $app = $_GET['app'];
         $control = $_GET['con'];
@@ -26,7 +28,7 @@ class Bootstrap {
         $action = ucfirst($action);
 
         //这里构造出控制器文件的路径
-        $controlFile = APP_PATH  .$app. '/' . $control . '.php';
+        $controlFile = CONTOLLER_PATH. '.php';
 
         //如果文件不存在提示错误, 否则引入
         if (!file_exists($controlFile)){
@@ -50,6 +52,8 @@ class Bootstrap {
             exit ("{$control}.php中未定义的控制器类" . $class);
         }
         $instance = new $class(); //否则创建实例
+
+
 
         if (!method_exists($instance, $action)) //判断实例$instance中是否存在$action方法, 不存在则提示错误
         {
@@ -90,6 +94,9 @@ class Bootstrap {
         //和上面一样
         $_GET['act'] = !empty ($action) ? $action : $Config['DEFAULT_ACTION'];
 
+        define('APP_PATH', APP_ROOT_PATH . '/' . $_GET['app']);
+        define('CONTOLLER_PATH', APP_PATH. '/' . $_GET['con']);
+        define('ACTION_PATH', CONTOLLER_PATH . '/' . $_GET['act']);
     }
 
     //读取插件类

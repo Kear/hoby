@@ -3,6 +3,7 @@ Hi, everyone!
 	
 	If you want to join to develop Hoby, give me a mail.
 
-Yours,
-	Kearney.
-	xywcv@qq.com
+	将Smarty整合到框架里了。
+
+	Yours,Kearney
+	Email:xywcv@qq.com

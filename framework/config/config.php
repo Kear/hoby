@@ -11,7 +11,7 @@ header('Content-Type:text/html; charset=utf-8');
 
 define('ROOT_PATH',str_replace('\\','/',dirname(dirname(dirname(__FILE__)))));
 define('FRAMEWORK_PATH', ROOT_PATH . '/framework');
-define('APP_PATH', ROOT_PATH . '/app/');
+define('APP_ROOT_PATH', ROOT_PATH . '/app');
 
 
   if(!defined('ISEXIST')) exit("请从入口文件运行程序");
