@@ -1,12 +1,11 @@
 <?php
 /**
  *
- * @category   Leb
- * @package    Leb_Model
- * @author         jide@leju.sina.com.cn
- * @version    $Id: project.php 7737 2012-08-29 07:48:25Z kaikai $
- * @copyright
- * @license
+ * 'Simple Makes Boom'
+ * Created on 2012-11-5
+ * @author: Kearney
+ * @E-mail: kearneyjar@gmail.com
+ *
  */
 
 class Security

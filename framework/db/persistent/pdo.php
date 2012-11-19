@@ -2,14 +2,13 @@
 /**
  * Pdo数据库驱动类
  *
+ * 'Simple Makes Boom'
+ * Created on 2012-11-5
+ * @author: Kearney
+ * @E-mail: kearneyjar@gmail.com
  *
- * @category   Leb
- * @package    Leb_Db
- * @author     liuxp
- * @version    $Id: pdo.php 9548 2012-11-06 03:46:05Z guangzhao $
- * @copyright
- * @license
  */
+
 require_once('abstract.php');
 class Leb_Dao_Pdo extends Db
 {

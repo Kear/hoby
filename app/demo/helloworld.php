@@ -30,7 +30,6 @@
 
         $this->assign('test', 'nihao');
         $this->display('index');
-
      }
     function Test(){
         echo 'hahahahah';

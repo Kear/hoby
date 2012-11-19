@@ -1,15 +1,13 @@
 <?php
-/**
- * 处理业务关系及数据关系的模型
- *
- *
- * @category   Leb
- * @package    Leb_Model
- * @author     liuxp
- * @version    $Id: model.php 9575 2012-11-06 06:01:04Z guangzhao $
- * @copyright
- * @license
- */
+  /**
+   * 处理业务关系及数据关系的模型
+   *
+   * 'Simple Makes Boom'
+   * Created on 2012-11-7
+   * @author: Kearney
+   * @E-mail: kearneyjar@gmail.com
+   *
+   */
 
 define('HAS_ONE',1);
 define('BELONGS_TO',2);

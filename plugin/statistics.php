@@ -1,14 +1,12 @@
 <?php
 
 /**
- * 统计类
  *
+ * 'Simple Makes Boom'
+ * Created on 2012-11-5
+ * @author: Kearney
+ * @E-mail: kearneyjar@gmail.com
  *
- * @category   Leb
- * @package    Leb_Plugin
- * @author 	   kaikai
- * @copyright
- * @license
  */
 
 class Plugin_statistics {

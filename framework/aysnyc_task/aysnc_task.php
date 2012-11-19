@@ -7,10 +7,15 @@
    * 主执行进程不会等待异步进程的返回值
    * 不通过web server执行，不给web server带来额外压力
    *
-   * @author guangzhao1@leju.sina.com.cn
    *
    * @usage: plugin_AsyncTask::run('latest1', 'test6', 'test', array());
    * @usage: new plugin_AysncTask()->run('latest1', 'test6', 'test', array());
+   *
+   * 'Simple Makes Boom'
+   * Created on 2012-11-7
+   * @author: Kearney
+   * @E-mail: kearneyjar@gmail.com
+   *
    */
 
 class AsyncTask

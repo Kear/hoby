@@ -3,9 +3,15 @@
   /**
    * 后台异步执行代理程序，可加载并使用框架，
    * 模拟一个相对真实的web请求执行环境
-   * 
-   * usage: 
+   *
+   * usage:
    *       php /path/to/async_task_proxy.php <json_params_mckey> <queue_mckey> <mcip>
+   *
+   * 'Simple Makes Boom'
+   * Created on 2012-11-7
+   * @author: Kearney
+   * @E-mail: kearneyjar@gmail.com
+   *
    */
 
 if (!function_exists('apache_get_version')) {
@@ -40,9 +46,9 @@ class ConsoleApplication
             }
         */
         // 设置$_SERVER模块请求环境变量
-        
+
         // $_SERVER = array();
-        
+
         $_SERVER['HTTP_HOST'] = 'photo.house.sina.com.cn';
         // $_SERVER['REQUEST_URI'] = '/test/test6/phpinfo?abcd=123';
         //  $_SERVER['SINASRV_CACHE_DIR'] = '/tmp/CACHE/cache';
@@ -52,7 +58,7 @@ class ConsoleApplication
         //        $_SERVER['SINASRV_RESOURCE_URL'] = '';
         // $_SERVER['SINASRV_DIST_URL'] = '';
         //     $_SERVER['SERVER_ADDR'] = '127.0.0.1';
-        
+
     }
 
     protected function _initFramework()
@@ -80,7 +86,7 @@ class ConsoleApplication
         $_SERVER['PHP_SELF'] = $_SERVER['SCRIPT_NAME'] = $_SERVER['SCRIPT_URL']
             = substr($request_uri, 0, strpos($request_uri, '?'));
         $_SERVER['QUERY_STRING'] = substr($request_uri, strpos($request_uri, '?') + 1);
-        $_POST['params'] = $_GET['params'] = $_REQUEST['params'] 
+        $_POST['params'] = $_GET['params'] = $_REQUEST['params']
             = substr($request_uri, strpos($request_uri, '=') + 1);
 
         if (!empty($host)) {
@@ -94,8 +100,8 @@ class ConsoleApplication
         require_once(_FRAMEWORK_.'/loader.php');
         Leb_Loader::setAutoLoad();
 
-        // print_r(get_include_path());        
-        
+        // print_r(get_include_path());
+
         ob_start();
 
         // 中心控制 请求->路由->过滤->分发->响应
@@ -105,7 +111,7 @@ class ConsoleApplication
         $output = ob_get_clean();
 
         $this->_cleanupVirtualConsole();
-        
+
         if ($this->_output) {
             echo $output;
         }
@@ -122,7 +128,7 @@ class ConsoleApplication
     {
 
         $this->_cleanupVirtualConsole();
-        return $this;        
+        return $this;
     }
 };
 
@@ -164,11 +170,11 @@ for ($i = 1; $i < $max_task_queue; ++ $i) {
     break;
 }
 
-// 无可用的proc，入队，退出，不可超过限定的异步进程数    
+// 无可用的proc，入队，退出，不可超过限定的异步进程数
 if ($free_task_proc_seq == 0) {
     enqueue_task($argv[1]);
     echo "exceed max task queue.\n";
-    exit(4); // 
+    exit(4); //
 }
 
 // 有可用的proc
@@ -179,7 +185,7 @@ if ($free_task_proc_seq == 0) {
 
     // 处理该任务
     $bret = run_task($argc, $argv);
-    
+
     // 循环查找队列中的任务并处理
     while (true) {
         $next_task_param_file = find_next_task();
@@ -252,7 +258,7 @@ function run_task($pargc, $pargv) {
     $capp->get($turi, '');
 
     unlink($argv[1]);
-    
+
     return true;
 }
 
@@ -301,7 +307,7 @@ function find_next_task() {
 function enqueue_task($param_file) {
     global $task_queue_lock_file;
     global $task_queue_mckey;
-    
+
     $fp = fopen($task_queue_lock_file, "w+");
     if (!$fp) {
         qlog(0, "Can not open file: {$task_queue_lock_file}");
