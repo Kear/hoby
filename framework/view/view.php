@@ -14,7 +14,14 @@ class View{
     public function __construct(){
 
         include(FRAMEWORK_PATH.'/view/smarty/Smarty.class.php');
+
+        //SAE
+        $path = "saemc://templates_c";
+        mkdir($path);
         $this->smarty = new Smarty();
+        $this->smarty->template_dir = "./templates";
+        $this->smarty->compile_dir = $path;
+
     }
 
     public function assign($key, $val){

@@ -17,10 +17,10 @@ define('APP_ROOT_PATH', ROOT_PATH . '/app');
   if(!defined('ISEXIST')) exit("请从入口文件运行程序");
 
   $Config = array(
-      'URL_MODE' => 1,//url模式,1为普通模式,2为path_info模式
+      'URL_MODE' => 2,//url模式,1为普通模式,2为path_info模式
 
       'DEAFAULT_APP' => 'demo',//默认的应用
-      'DEFAULT_CONTROLLER' => 'helloworld',//默认的控制器
+      'DEFAULT_CONTROLLER' => 'test',//默认的控制器
       'DEFAULT_ACTION' => 'index'//默认的方法
       );
 ?>

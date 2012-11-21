@@ -6,7 +6,8 @@
  * @E-mail: kearneyjar@gmail.com
  *
  */
- class mysql extends DB{
+ class Mysql extends DB{
+
 
  }
 ?>

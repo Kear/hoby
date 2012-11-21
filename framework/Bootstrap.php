@@ -36,7 +36,7 @@ class Bootstrap {
         }
         include($controlFile);
 
-        $dbFile = FRAMEWORK_PATH . '/db/memory/memcache.php';
+        $dbFile = FRAMEWORK_PATH . '/db/persistent/db.php';
         //引入DB类
         if(!file_exists($dbFile)){
             exit("db类不存在。");

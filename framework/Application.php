@@ -15,14 +15,14 @@
 
      public function _init(){
 
-         echo 'Autoload start...<br>';
-         $this->load_privilege();
-         $this->load_config();
-         $this->load_functions();
-         $this->load_model();
-         $this->generate_log();
-         echo 'Autoload end!<br>';
-         echo '-----------------------<br>';
+//         echo 'Autoload start...<br>';
+//         $this->load_privilege();
+//         $this->load_config();
+//         $this->load_functions();
+//         $this->load_model();
+//         $this->generate_log();
+//         echo 'Autoload end!<br>';
+//         echo '-----------------------<br>';
      }
 
      public function load_privilege(){
