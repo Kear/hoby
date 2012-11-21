@@ -3,7 +3,8 @@ Hi, everyone!
 	
 	If you want to join to develop Hoby, give me a mail.
 
-	将Smarty整合到框架里了。
+	1.Smarty整合到框架里了。
+	2.Mysql整合进去了。
 
 	Yours,Kearney
 	Email:xywcv@qq.com
