@@ -5,6 +5,7 @@ Hi, everyone!
 
 	1.Smarty整合到框架里了。
 	2.Mysql整合进去了。
+	3.新加了demo
 
-	Yours,Kearney
-	Email:xywcv@qq.com
+
+Kearney,Email:xywcv@qq.com
