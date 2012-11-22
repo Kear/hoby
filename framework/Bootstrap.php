@@ -6,63 +6,27 @@ class Bootstrap {
             exit("请从入口文件运行程序");
         }
 
-        $this->Analysis();
+        //处理URL路由
+        $this->AnalysisURL();
+
+        //加载Plugin类
         $this->launchPlugin();
 
         //引入View类
-        include($viewfile = FRAMEWORK_PATH . '/view/view.php');
+        $this->launchView();
 
-        //引入Application类
-        $applicationFile = FRAMEWORK_PATH . '/Application.php';
+        //加载Model类
+        $this->launchModel();
 
-        if(!file_exists($applicationFile)){
-            exit("Application类不存在。");
-        }
-        include($applicationFile);
+        //加载Application类
+        $this->launchApplication();
 
+        //加载创建Controller实例
+        $this->makeController();
 
-        //开始解析URL获得请求的控制器和方法
-        $app = $_GET['app'];
-        $control = $_GET['con'];
-        $action = $_GET['act'];
-        $action = ucfirst($action);
-
-        //这里构造出控制器文件的路径
-        $controlFile = CONTOLLER_PATH. '.php';
-
-        //如果文件不存在提示错误, 否则引入
-        if (!file_exists($controlFile)){
-            exit("{$control}控制器不存在<br>" . "请检查: " . $controlFile . "是否存在<br>");
-        }
-        include($controlFile);
-
-        $dbFile = FRAMEWORK_PATH . '/db/persistent/db.php';
-        //引入DB类
-        if(!file_exists($dbFile)){
-            exit("db类不存在。");
-        }
-        include($dbFile);
-
-
-
-        $class = ucfirst($control); //将控制器名称中的每个单词首字母大写,来当作控制器的类名
-
-        if (!class_exists($class)) //判断类是否存在, 如果不存在提示错
-        {
-            exit ("{$control}.php中未定义的控制器类" . $class);
-        }
-        $instance = new $class(); //否则创建实例
-
-
-
-        if (!method_exists($instance, $action)) //判断实例$instance中是否存在$action方法, 不存在则提示错误
-        {
-            exit ($class."类中不存在方法:" . $action);
-        }
-        $instance->$action();
     }
 
-    protected function Analysis() {
+    protected function AnalysisURL() {
         //$GLOBALS['C']['URL_MODE'];
         global $Config; //包含全局配置数组, 这个数组是在Config.ph文件中定义的,global声明$C是调用外部的
 
@@ -76,10 +40,7 @@ class Bootstrap {
             if ($Config['URL_MODE'] == 2) //如果为2 那么就是使用PATH_INFO模式, 也就是url地址是这样的    [url=http://localhost/index.php/]http://localhost/index.php/[/url]控制器/方法 /其他参数
                 {
                 if (isset ($_SERVER['PATH_INFO'])) {
-                    //$_SERVER['PATH_INFO']URL地址中文件名后的路径信息, 不好理解, 来看看例子
-                    //比如你现在的URL是 [url=http://www.php100.com/index.php]http://www.php100.com/index.php[/url] 那么你的$_SERVER['PATH_INFO']就是空的
-                    //但是如果URL是 [url=http://www.php100.com/index.php/abc/123]http://www.php100.com/index.php/abc/123[/url]
-                    //现在的$_SERVER['PATH_INFO']的值将会是 index.php文件名称后的内容 /abc/123/
+
                     $path = trim($_SERVER['PATH_INFO'], '/');
                     $paths = explode('/', $path);
                     $app = array_shift($paths);
@@ -117,6 +78,82 @@ class Bootstrap {
                 }
             }
         }
+    }
+
+
+    //加载数据Model类
+    public function launchModel(){
+
+        $dbFile = FRAMEWORK_PATH . '/db/persistent/db.php';
+        //引入DB类
+        if(!file_exists($dbFile)){
+            exit("db类不存在。");
+        }
+        include($dbFile);
+
+        //加载数据mysql_model，由于app/model是集成db类，因此后加载app/model
+        $modelFile = APP_PATH . '/model/mysql.php';
+
+        if(!file_exists($modelFile)){
+            exit("应用model加载失败，找不到该文件:".$modelFile);
+        }
+        include($modelFile);
+        //结束
+    }
+
+
+    //加载Application类
+    public function launchApplication(){
+        //引入Application类
+        $applicationFile = FRAMEWORK_PATH . '/Application.php';
+
+        if(!file_exists($applicationFile)){
+            exit("Application类不存在。");
+        }
+        include($applicationFile);
+    }
+
+
+    //加载View类
+    public function launchView(){
+        include($viewfile = FRAMEWORK_PATH . '/view/view.php');
+    }
+
+
+    //创建Controller实例
+    public function makeController(){
+
+        //开始解析URL获得请求的控制器和方法
+        $app = $_GET['app'];
+        $control = $_GET['con'];
+        $action = $_GET['act'];
+        $action = ucfirst($action);
+
+        //这里构造出控制器文件的路径
+        $controlFile = CONTOLLER_PATH. '.php';
+
+        //如果文件不存在提示错误, 否则引入
+        if (!file_exists($controlFile)){
+            exit("{$control}控制器不存在<br>" . "请检查: " . $controlFile . "是否存在<br>");
+        }
+        include($controlFile);
+
+
+        $class = ucfirst($control); //将控制器名称中的每个单词首字母大写,来当作控制器的类名
+
+        if (!class_exists($class)) //判断类是否存在, 如果不存在提示错
+        {
+            exit ("{$control}.php中未定义的控制器类" . $class);
+        }
+        $instance = new $class(); //否则创建实例
+
+
+
+        if (!method_exists($instance, $action)) //判断实例$instance中是否存在$action方法, 不存在则提示错误
+        {
+            exit ($class."类中不存在方法:" . $action);
+        }
+        $instance->$action();
     }
 }
 ?>

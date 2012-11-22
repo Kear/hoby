@@ -9,24 +9,7 @@
 
  class Test extends Application{
 
-    function Index(){
-
-        //加载数据model
-        $modelFile = str_replace('\\','/',(dirname(__FILE__))).'/model/mysql.php';
-        if(!file_exists($modelFile)){
-            exit("应用model加载失败，找不到该文件:".$modelFile);
-        }
-        include($modelFile);
-        //结束
-
-
-        //使用数据库查询示例
-        $mysql = new Mysql();
-        $result = $mysql->select('select * from news');
-        print_r($result);
-        $mysql->close();
-        //结束
-
+    function index(){
 
         //调用Smarty
         $this->assign('test', 'nihao');
@@ -34,9 +17,23 @@
         //结束
 
      }
-    function Tester(){
+
+    function tester(){
+
         $this->assign('test', 'nihao');
         $this->display('admin');
+    }
+
+    function mysql(){
+
+
+        //使用数据库查询示例
+        $mysql = new Mysql();
+        $result = $mysql->select('select * from user');
+        print_r($result);
+
+        $mysql->close();
+        //结束
     }
  }
 
